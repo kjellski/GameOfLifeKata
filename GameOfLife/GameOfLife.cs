@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace GameOfLife
 {
@@ -92,12 +93,26 @@ namespace GameOfLife
 
         public static int GetCell(int x, int y, bool[,] land)
         {
-            if (x < 0 || x > land.GetLength(XDimension) - 1 || y < 0 || y > land.GetLength(YDimension))
+            if (x < 0 || x > land.GetLength(XDimension) - 1 || y < 0 || y > land.GetLength(YDimension) - 1)
             {
                 return 0;
             }
 
             return land[y, x] ? 1 : 0;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            for (int y = 0; y < _ySize; y++)
+            {
+                for (int x = 0; x < _xSize; x++)
+                {
+                    sb.Append(IsCellAlive(x, y, _land) ? "*" : ".");
+                }
+                sb.Append("\n");
+            }
+            return sb.ToString();
         }
     }
 }

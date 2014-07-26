@@ -6,6 +6,27 @@ namespace GameOfLife.Tests
     public class GameOfLifeTests
     {
         [Test]
+        public void CreatesNextGenerationCorrectly()
+        {
+            // arrange
+            var land = new bool[,]
+            {
+                {false, false, false, false, false},
+                {false, true, true, false, false},
+                {false, true, false, false, false}
+            };
+            var gof = new GameOfLife(land);
+
+            // act 
+            gof.NextGeneration();
+
+            // assert
+            Assert.That(GameOfLife.IsCellAlive(1, 1, land), Is.True);
+            Assert.That(GameOfLife.IsCellAlive(2, 1, land), Is.True);
+            Assert.That(GameOfLife.IsCellAlive(1, 2, land), Is.True);
+        }
+
+        [Test]
         public void CountNeighbours_Counts_Right_In_Corner()
         {
             // arrange
