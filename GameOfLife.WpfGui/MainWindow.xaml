@@ -4,6 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="GameOfLife.WpfGui.MainWindow"
         Title="MainWindow" Height="600"  Width="800">
     <Grid d:IsLocked="True">
-        <Canvas x:Name="Canvas"/>
+        <Canvas x:Name="LandCanvas"/>
     </Grid>
 </Window>

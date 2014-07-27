@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace GameOfLife.Core
 {
@@ -6,8 +7,8 @@ namespace GameOfLife.Core
     {
         public static bool[,] Read(String land)
         {
-            var lines = land.Split('\n');
-            var result = new bool[lines.Length, lines[0].Length];
+            var lines = land.Split('\n').Where(line => line.Length > 1).ToArray();
+            var result = new bool[lines.Length, lines[0].Length]; 
             for (var y = 0; y < lines.Length; y++)
             {
                 var line = lines[y];

@@ -11,23 +11,34 @@ namespace GameOfLife.WpfGui
     {
         private const int PixelWidth = 10;
         private const int PixelHeight = 10;
-        private readonly int _xSize;
-        private readonly int _ySize;
+        private int _xSize = 0;
+        private int _ySize = 0;
         private Canvas _canvas;
-        private GameOfLife.Core.GameOfLife _gof;
+        private Core.GameOfLife _gof;
 
         public MainWindow()
         {
             InitializeComponent();
-            _canvas = Canvas;
+            InitializeCanvas();
+            InitializeGameOfLife();
+        }
 
-            _xSize = (int) Math.Floor(_canvas.Width/PixelWidth);
-            _ySize = (int) Math.Floor(_canvas.Width/PixelHeight);
+        private void InitializeCanvas()
+        {
+            _canvas = LandCanvas;
+
+            _xSize = (int) Math.Floor(_canvas.ActualWidth/PixelWidth);
+            _ySize = (int) Math.Floor(_canvas.ActualHeight/PixelHeight);
         }
 
         public void InitializeGameOfLife()
         {
-            _gof = new GameOfLife.Core.GameOfLife(_xSize, _ySize);
+            _gof = new Core.GameOfLife(_xSize, _ySize);
+        }
+
+        public void DrawLandOnCanvas()
+        {
+            var rect = new Rect(new Point(50, 50), new Size(PixelWidth, PixelHeight));
         }
     }
 }
