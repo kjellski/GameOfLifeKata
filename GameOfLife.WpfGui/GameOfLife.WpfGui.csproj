@@ -7,8 +7,8 @@
     <ProjectGuid>{365C968B-9D04-4F2E-8084-99289BADCE4F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameOfLifeKata</RootNamespace>
-    <AssemblyName>GameOfLifeKata</AssemblyName>
+    <RootNamespace>GameOfLife.WpfGui</RootNamespace>
+    <AssemblyName>GameOfLife.WpfGui</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -92,6 +92,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameOfLife.Core\GameOfLife.Core.csproj">
+      <Project>{8B7D4434-BAD5-43CF-A4D8-3AB54AA57B81}</Project>
+      <Name>GameOfLife.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameOfLife
+namespace GameOfLife.Core
 {
     public static class GameOfLifeStringReader
     {

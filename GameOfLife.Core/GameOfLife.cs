@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 
-namespace GameOfLife
+namespace GameOfLife.Core
 {
     public class GameOfLife
     {
@@ -104,14 +105,17 @@ namespace GameOfLife
         public override string ToString()
         {
             var sb = new StringBuilder();
+            sb.Append("/" + String.Join("", Enumerable.Repeat('-', _xSize)) + "\\\n");
             for (int y = 0; y < _ySize; y++)
             {
+                sb.Append("|");                
                 for (int x = 0; x < _xSize; x++)
                 {
-                    sb.Append(IsCellAlive(x, y, _land) ? "*" : ".");
+                    sb.Append(IsCellAlive(x, y, _land) ? "*" : " ");
                 }
-                sb.Append("\n");
+                sb.Append("|\n");
             }
+            sb.Append("\\" + String.Join("", Enumerable.Repeat('-', _xSize)) + "/\n");
             return sb.ToString();
         }
     }

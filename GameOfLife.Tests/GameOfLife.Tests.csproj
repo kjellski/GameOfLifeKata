@@ -57,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameOfLife\GameOfLife.csproj">
-      <Project>{8B7D4434-BAD5-43CF-A4D8-3AB54AA57B81}</Project>
-      <Name>GameOfLife</Name>
+    <ProjectReference Include="..\GameOfLife.Core\GameOfLife.Core.csproj">
+      <Project>{8b7d4434-bad5-43cf-a4d8-3ab54aa57b81}</Project>
+      <Name>GameOfLife.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

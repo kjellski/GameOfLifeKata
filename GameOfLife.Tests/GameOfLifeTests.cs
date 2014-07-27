@@ -15,15 +15,15 @@ namespace GameOfLife.Tests
                 {false, true, true, false, false},
                 {false, true, false, false, false}
             };
-            var gof = new GameOfLife(land);
+            var gof = new Core.GameOfLife(land);
 
             // act 
             gof.NextGeneration();
 
             // assert
-            Assert.That(GameOfLife.IsCellAlive(1, 1, land), Is.True);
-            Assert.That(GameOfLife.IsCellAlive(2, 1, land), Is.True);
-            Assert.That(GameOfLife.IsCellAlive(1, 2, land), Is.True);
+            Assert.That(Core.GameOfLife.IsCellAlive(1, 1, land), Is.True);
+            Assert.That(Core.GameOfLife.IsCellAlive(2, 1, land), Is.True);
+            Assert.That(Core.GameOfLife.IsCellAlive(1, 2, land), Is.True);
         }
 
         [Test]
@@ -32,19 +32,19 @@ namespace GameOfLife.Tests
             // arrange
             // act
             // assert
-            Assert.That(GameOfLife.CountNeighbours(0, 0, new[,]
+            Assert.That(Core.GameOfLife.CountNeighbours(0, 0, new[,]
             {
                 {true, false},
                 {true, false}
             }), Is.EqualTo(1));
 
-            Assert.That(GameOfLife.CountNeighbours(0, 0, new[,]
+            Assert.That(Core.GameOfLife.CountNeighbours(0, 0, new[,]
             {
                 {true, true},
                 {true, false}
             }), Is.EqualTo(2));
 
-            Assert.That(GameOfLife.CountNeighbours(0, 0, new[,]
+            Assert.That(Core.GameOfLife.CountNeighbours(0, 0, new[,]
             {
                 {true, true},
                 {true, true}
@@ -63,10 +63,10 @@ namespace GameOfLife.Tests
 
             // act
             // assert
-            Assert.That(GameOfLife.GetCell(0, 0, land), Is.EqualTo(1));
-            Assert.That(GameOfLife.GetCell(0, 1, land), Is.EqualTo(1));
-            Assert.That(GameOfLife.GetCell(1, 0, land), Is.EqualTo(0));
-            Assert.That(GameOfLife.GetCell(1, 1, land), Is.EqualTo(0));
+            Assert.That(Core.GameOfLife.GetCell(0, 0, land), Is.EqualTo(1));
+            Assert.That(Core.GameOfLife.GetCell(0, 1, land), Is.EqualTo(1));
+            Assert.That(Core.GameOfLife.GetCell(1, 0, land), Is.EqualTo(0));
+            Assert.That(Core.GameOfLife.GetCell(1, 1, land), Is.EqualTo(0));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace GameOfLife.Tests
 
             // act
             // assert
-            Assert.That(() => GameOfLife.GetCell(x, y, land), Throws.Nothing);
+            Assert.That(() => Core.GameOfLife.GetCell(x, y, land), Throws.Nothing);
         }
         
         [Test]
@@ -98,15 +98,15 @@ namespace GameOfLife.Tests
             };
             // act 
             // assert
-            Assert.That(GameOfLife.IsCellAlive(0, 0, land), Is.True);
-            Assert.That(GameOfLife.IsCellAlive(1, 0, land), Is.False);
+            Assert.That(Core.GameOfLife.IsCellAlive(0, 0, land), Is.True);
+            Assert.That(Core.GameOfLife.IsCellAlive(1, 0, land), Is.False);
         }
 
         [Test]
         public void LandProperty_Returns_A_ReadCopy()
         {
             // arrange
-            var gol = new GameOfLife(new[,]
+            var gol = new Core.GameOfLife(new[,]
             {
                 {false, false},
                 {false, false}
@@ -136,10 +136,10 @@ namespace GameOfLife.Tests
             const bool value = true;
 
             // act 
-            GameOfLife.SetCell(x, y, ref land, value);
+            Core.GameOfLife.SetCell(x, y, ref land, value);
 
             // assert
-            Assert.That(GameOfLife.IsCellAlive(x, y, land), Is.EqualTo(value));
+            Assert.That(Core.GameOfLife.IsCellAlive(x, y, land), Is.EqualTo(value));
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace GameOfLife.Tests
             // arrange
             // act 
             // assert
-            Assert.That(GameOfLife.WillCellLive(alive, neighbours), Is.EqualTo(willLive));
+            Assert.That(Core.GameOfLife.WillCellLive(alive, neighbours), Is.EqualTo(willLive));
         }
     }
 }
