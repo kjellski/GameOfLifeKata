@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using GameOfLife.Core;
 
 namespace GameOfLife.WpfGui
 {
@@ -11,34 +15,65 @@ namespace GameOfLife.WpfGui
     {
         private const int PixelWidth = 10;
         private const int PixelHeight = 10;
-        private int _xSize = 0;
-        private int _ySize = 0;
+        private readonly Core.GameOfLife _gof;
+        private double _actualHeight;
+        private double _actualWidth;
         private Canvas _canvas;
-        private Core.GameOfLife _gof;
+        private int _xSize;
+        private int _ySize;
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeCanvas();
-            InitializeGameOfLife();
+            _gof = new Core.GameOfLife(GameOfLifeStringReader.Read(ExampleLands.Land1));
+
+            DrawLand();
         }
 
         private void InitializeCanvas()
         {
             _canvas = LandCanvas;
-
-            _xSize = (int) Math.Floor(_canvas.ActualWidth/PixelWidth);
-            _ySize = (int) Math.Floor(_canvas.ActualHeight/PixelHeight);
+            _actualWidth = _canvas.Width;
+            _actualHeight = _canvas.Height;
+            _xSize = (int)Math.Floor(_actualWidth / PixelWidth);
+            _ySize = (int)Math.Floor(_actualHeight / PixelHeight);
         }
 
-        public void InitializeGameOfLife()
+        private void DrawLand()
         {
-            _gof = new Core.GameOfLife(_xSize, _ySize);
-        }
+            _canvas.Children.Clear();
+            var actualLand = _gof.Land;
+            for (var y = 0; y < _ySize; y++)
+            {
+                for (var x = 0; x < _xSize; x++)
+                {
+                    var isCellAlive = Core.GameOfLife.IsCellAlive(x, y, actualLand);
 
-        public void DrawLandOnCanvas()
+                    var rect = new Rectangle
+                    {
+                        Width = PixelWidth,
+                        Height = PixelHeight,
+                        Fill = isCellAlive ? Brushes.Black : Brushes.White,
+                        Stroke = Brushes.Gray
+                    };
+
+                    Canvas.SetTop(rect, y * PixelHeight);
+                    Canvas.SetLeft(rect, x * PixelWidth);
+                    _canvas.Children.Add(rect);
+                }
+            }
+        }
+        
+        private void LandGrid_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var rect = new Rect(new Point(50, 50), new Size(PixelWidth, PixelHeight));
+            DrawLand();
+        }
+    
+        private void Window_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            _gof.NextGeneration();
+            DrawLand();
         }
     }
 }

@@ -70,4 +70,4 @@ packages/
 *.DotSettings
 
 #binaries
-*.dll
+*.dll   
