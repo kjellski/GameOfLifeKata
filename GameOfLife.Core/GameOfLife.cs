@@ -74,6 +74,12 @@ namespace GameOfLife.Core
             return !alive && cellNeighbours == 3; 
         }
 
+
+        public void SetCell(int x, int y, bool value)
+        {
+            SetCell(x, y, ref _land, value);
+        }
+
         public static void SetCell(int x, int y, ref bool[,] land, bool value)
         {
             land[y, x] = value;

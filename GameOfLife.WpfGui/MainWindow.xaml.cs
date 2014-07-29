@@ -36,8 +36,8 @@ namespace GameOfLife.WpfGui
             _canvas = LandCanvas;
             _actualWidth = _canvas.Width;
             _actualHeight = _canvas.Height;
-            _xSize = (int)Math.Floor(_actualWidth / PixelWidth);
-            _ySize = (int)Math.Floor(_actualHeight / PixelHeight);
+            _xSize = (int) Math.Floor(_actualWidth/PixelWidth);
+            _ySize = (int) Math.Floor(_actualHeight/PixelHeight);
         }
 
         private void DrawLand()
@@ -58,22 +58,53 @@ namespace GameOfLife.WpfGui
                         Stroke = Brushes.Gray
                     };
 
-                    Canvas.SetTop(rect, y * PixelHeight);
-                    Canvas.SetLeft(rect, x * PixelWidth);
+                    Canvas.SetTop(rect, y*PixelHeight);
+                    Canvas.SetLeft(rect, x*PixelWidth);
                     _canvas.Children.Add(rect);
                 }
             }
         }
-        
+
         private void LandGrid_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             DrawLand();
         }
-    
+
         private void Window_OnKeyDown(object sender, KeyEventArgs e)
         {
             _gof.NextGeneration();
             DrawLand();
+        }
+
+        private void SetCellOnLand_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CheckMouseButtonStateAndSetCell(e);
+        }
+
+        private void CheckMouseButtonStateAndSetCell(MouseEventArgs e)
+        {
+            if (e.LeftButton != MouseButtonState.Pressed || _canvas == null)
+                return;
+
+            SetCellAndRedraw(e.GetPosition(_canvas));
+        }
+
+        private void SetCellAndRedraw(Point pos)
+        {
+            SetCellOnPosition(pos);
+            DrawLand();
+        }
+
+        private void SetCellOnPosition(Point pos)
+        {
+            var x = (int) pos.X/PixelWidth;
+            var y = (int) pos.Y/PixelHeight;
+            _gof.SetCell(x, y, true);
+        }
+
+        private void SetCellOnLand_MouseMove(object sender, MouseEventArgs e)
+        {
+            CheckMouseButtonStateAndSetCell(e);
         }
     }
 }
